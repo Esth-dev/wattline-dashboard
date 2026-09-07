@@ -1,0 +1,67 @@
+<header class="topbar">
+  <div class="brand">
+    <svg class="brand-logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13 2 3 14h7l-1 8 12-12h-7l1-8z"/>
+    </svg>
+    <div class="brand-text">
+      <h1>Wattline</h1>
+      <p>Supervision énergétique multi-sites — démo front-end IoT</p>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="conn" [class.off]="!connected()" role="status">
+      <span class="conn-dot" aria-hidden="true"></span>
+      {{ connected() ? 'Passerelles en ligne' : 'Liaison perdue' }}
+    </span>
+    <button type="button" class="btn" (click)="telemetry.toggleConnection()">
+      {{ connected() ? 'Simuler une panne' : 'Rétablir la liaison' }}
+    </button>
+  </div>
+</header>
+
+@if (!connected()) {
+  <div class="banner" role="alert">
+    Canal temps réel interrompu : les passerelles edge continuent de journaliser
+    localement, la reprise des mesures est automatique au retour de la liaison.
+  </div>
+}
+
+<main class="grid">
+  <app-kpi-card
+    label="Puissance instantanée"
+    [value]="power()"
+    unit="kW"
+    icon="bolt"
+    [trend]="trend()"
+    hint="parc complet · temps réel" />
+  <app-kpi-card
+    label="Énergie aujourd'hui"
+    [value]="energy()"
+    unit="kWh"
+    icon="energy"
+    hint="consolidé depuis 00:00" />
+  <app-kpi-card
+    label="Coût estimé"
+    [value]="cost()"
+    unit="€"
+    icon="euro"
+    hint="tarif 0,1745 €/kWh" />
+  <app-kpi-card
+    label="Sites en ligne"
+    [value]="sitesOnline()"
+    icon="plug"
+    hint="passerelles edge joignables" />
+
+  <app-consumption-chart class="zone-chart"
+    [history]="telemetry.history()"
+    [connected]="connected()" />
+
+  <app-alerts-panel class="zone-alerts" [alerts]="telemetry.alerts()" />
+
+  <app-site-table class="zone-table" [sites]="telemetry.sites()" />
+</main>
+
+<footer class="footer">
+  Démo technique — données simulées côté client (aucun backend) ·
+  Angular 20 · TypeScript strict · Signals + RxJS · SVG natif · CI/CD GitHub Actions
+</footer>

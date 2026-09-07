@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.chart-head h2 {
+  margin: 0;
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.chart-window {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  flex: 1;
+}
+
+.grid {
+  stroke: var(--color-border);
+  stroke-dasharray: 3 5;
+  stroke-width: 1;
+}
+
+.axis-base {
+  stroke-dasharray: none;
+}
+
+.axis {
+  fill: var(--color-text-muted);
+  font-size: 10px;
+  font-family: inherit;
+}
+
+.area {
+  stroke: none;
+}
+
+.line {
+  fill: none;
+  stroke: var(--color-accent-2);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.dot {
+  fill: var(--color-accent-2);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.last-label {
+  fill: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.chart-empty,
+.chart-offline {
+  margin: 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+}
+
+.chart-offline {
+  color: var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-warning) 35%, transparent);
+}

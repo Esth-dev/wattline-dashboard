@@ -1,0 +1,31 @@
+<article class="kpi">
+  <div class="kpi-head">
+    <span class="kpi-icon" aria-hidden="true">
+      @switch (icon()) {
+        @case ('bolt') {
+          <svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 12-12h-7l1-8z"/></svg>
+        }
+        @case ('energy') {
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        }
+        @case ('euro') {
+          <svg viewBox="0 0 24 24"><text x="12" y="17.5" text-anchor="middle" font-size="17" font-weight="700">€</text></svg>
+        }
+        @case ('plug') {
+          <svg viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0V8zM12 17v4"/></svg>
+        }
+      }
+    </span>
+    @if (trend() !== null) {
+      @let t = trend() ?? 0;
+      <span class="kpi-trend" [class.down]="t < 0" [attr.title]="'évolution sur la fenêtre glissante'">
+        {{ t >= 0 ? '▲ +' : '▼ ' }}{{ t.toFixed(1) }} %
+      </span>
+    }
+  </div>
+  <p class="kpi-value">{{ value() }}<span class="kpi-unit">{{ unit() }}</span></p>
+  <p class="kpi-label">{{ label() }}</p>
+  @if (hint()) {
+    <p class="kpi-hint">{{ hint() }}</p>
+  }
+</article>

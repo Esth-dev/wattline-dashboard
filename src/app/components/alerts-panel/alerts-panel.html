@@ -1,0 +1,29 @@
+<section class="alerts-card">
+  <header class="alerts-head">
+    <h2>Alarmes</h2>
+    <span class="alerts-count" [class.none]="alerts().length === 0">
+      {{ alerts().length }} active{{ alerts().length > 1 ? 's' : '' }}
+    </span>
+  </header>
+
+  @if (alerts().length === 0) {
+    <div class="alerts-empty">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+      <p>Aucune alarme active — parc nominal</p>
+    </div>
+  } @else {
+    <ul class="alerts-list">
+      @for (alert of alerts(); track alert.id) {
+        <li class="alert" [class]="alert.severity">
+          <span class="alert-dot" aria-hidden="true"></span>
+          <div class="alert-body">
+            <p class="alert-msg">{{ alert.message }}</p>
+            <p class="alert-meta">{{ alert.siteName }} · {{ timeOf(alert.raisedAt) }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

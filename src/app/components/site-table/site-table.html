@@ -1,0 +1,38 @@
+<section class="table-card">
+  <header class="table-head">
+    <h2>Parc supervisé</h2>
+    <span class="table-count">{{ sites().length }} passerelles edge</span>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Site</th>
+        <th scope="col">Liaison</th>
+        <th scope="col">Charge / capacité souscrite</th>
+        <th scope="col" class="num">Puissance</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (site of sites(); track site.id) {
+        <tr>
+          <td>
+            <span class="site-name">{{ site.name }}</span>
+            <span class="site-city">{{ site.city }}</span>
+          </td>
+          <td>
+            <span class="badge" [class]="site.status">{{ statusLabel(site.status) }}</span>
+          </td>
+          <td class="load-cell">
+            <span class="load-bar" role="presentation">
+              <span class="load-fill" [class.hot]="loadRatio(site) > 0.85"
+                    [style.width]="barWidth(site)"></span>
+            </span>
+            <span class="load-pct">{{ loadPct(site) }}</span>
+          </td>
+          <td class="num">{{ site.powerKw }} kW</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

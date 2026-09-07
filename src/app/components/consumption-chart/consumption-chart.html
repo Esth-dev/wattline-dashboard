@@ -1,0 +1,39 @@
+<section class="chart-card">
+  <header class="chart-head">
+    <h2>Puissance agrégée du parc</h2>
+    <span class="chart-window">flux temps réel · fenêtre glissante 80 s</span>
+  </header>
+
+  @if (geom(); as g) {
+    <svg class="chart" [attr.viewBox]="'0 0 ' + width + ' ' + height" role="img"
+         aria-label="Courbe de la puissance agrégée du parc">
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4cc3ff" stop-opacity="0.32"/>
+          <stop offset="100%" stop-color="#4cc3ff" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+
+      @for (gl of g.grid; track gl.y) {
+        <line class="grid" [attr.x1]="46" [attr.x2]="628" [attr.y1]="gl.y" [attr.y2]="gl.y"/>
+        <text class="axis" x="40" [attr.y]="gl.y + 4" text-anchor="end">{{ gl.label }}</text>
+      }
+      <line class="grid axis-base" [attr.x1]="46" [attr.x2]="628" [attr.y1]="214" [attr.y2]="214"/>
+
+      <path class="area" [attr.d]="g.area" fill="url(#areaGrad)"/>
+      <path class="line" [attr.d]="g.line"/>
+      <circle class="dot" [attr.cx]="g.lastX" [attr.cy]="g.lastY" r="4"/>
+      <text class="last-label" [attr.x]="g.lastX - 10" [attr.y]="g.lastY - 12" text-anchor="end">
+        {{ g.lastLabel }} kW
+      </text>
+    </svg>
+  } @else {
+    <p class="chart-empty">Collecte des premières mesures…</p>
+  }
+
+  @if (!connected()) {
+    <p class="chart-offline" role="status">
+      Liaison passerelle perdue — affichage des dernières mesures reçues
+    </p>
+  }
+</section>

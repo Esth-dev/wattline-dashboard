@@ -1,0 +1,71 @@
+/* ============================================================
+   Wattline — design system : tokens globaux
+   Couleurs, typographie, espacements, rayons, ombres.
+   Tout composant consomme exclusivement ces variables.
+   ============================================================ */
+
+:root {
+  /* Couleurs — thème sombre "salle de supervision" */
+  --color-bg: #0b1220;
+  --color-surface: #121a2b;
+  --color-surface-2: #1a2438;
+  --color-border: #26334d;
+  --color-text: #e7edf8;
+  --color-text-muted: #93a3c0;
+
+  /* Accents fonctionnels */
+  --color-accent: #35c56f;   /* nominal / énergie verte */
+  --color-accent-2: #4cc3ff; /* données / courbes */
+  --color-warning: #f5a524;  /* seuil 85 % / liaison dégradée */
+  --color-critical: #f04438; /* seuil 95 % / passerelle hors ligne */
+
+  /* Typographie */
+  --font-xs: 11px;
+  --font-sm: 13px;
+  --font-md: 15px;
+  --font-lg: 18px;
+  --font-2xl: 26px;
+
+  /* Espacements */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  /* Rayons & ombres */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.35), 0 4px 16px rgb(0 0 0 / 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    'Inter',
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: var(--font-md);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent-2) 35%, transparent);
+}
